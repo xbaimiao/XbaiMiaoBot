@@ -11,9 +11,9 @@ import com.xbaimiao.bot.minecraft.Xbaimiao;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
@@ -74,6 +74,21 @@ public class Main {
                 if (msg.startsWith("#")) {
                     yuq.getGroups().get(fromGroup).sendMessage(mf.newMessage().plus(sendCommand(msg)));
                 }
+            }
+            if (msg.startsWith("缩短 ")){
+                try {
+                    String iP = msg.substring(3).contains("http://") || msg.contains("https://")
+                            ? msg.substring(3) : "http://" + msg.substring(3);
+
+                    URL url = new URL(iP);
+                    BufferedReader getDurl = new BufferedReader(new InputStreamReader(
+                            new URL("http://yuq.ink:81/?ip=" + iP).openStream()));
+                    String ip = getDurl.readLine();
+                    e.getGroup().sendMessage(new Message().plus(ip));
+                } catch (Exception b) {
+                    b.printStackTrace();
+                }
+
             }
         }
     }
