@@ -8,8 +8,10 @@ import com.icecreamqaq.yuq.event.GroupMessageEvent;
 import com.icecreamqaq.yuq.message.Message;
 import com.icecreamqaq.yuq.message.MessageItemFactory;
 import com.xbaimiao.bot.minecraft.Xbaimiao;
+import com.xbaimiao.yamlconfig.ConfigMessage;
 
 import javax.inject.Inject;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,6 +31,12 @@ public class Test {
         Member qq = event.getSender();
         Long qqId = qq.getId();
         if (qqId == 3104026189L) {
+//            if (msg.equals("test")){
+//                ConfigMessage a = new ConfigMessage(new File("D:\\nmsl.yml"));
+//                a.setMessage("test",event.getMessage());
+//                event.getGroup().sendMessage(a.getMessage("test"));
+//                System.out.println(a.getMessage("test").getBody().toString());
+//            }
             Group group = event.getGroup();
             if (!removeQA.contains(qqId)) {
                 if (msg.equals("移除问答")) {
