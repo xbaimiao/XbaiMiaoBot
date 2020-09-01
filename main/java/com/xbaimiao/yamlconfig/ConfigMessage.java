@@ -35,7 +35,7 @@ public class ConfigMessage extends Config{
         return message;
     }
 
-    public void setMessage(String key, Message message) {
+    public void set(String key, Message message) {
         ArrayList<MessageItem> list = message.getBody();
         StringBuilder msg = new StringBuilder();
         for (MessageItem s : list) {

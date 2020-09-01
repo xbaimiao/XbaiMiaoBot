@@ -4,8 +4,8 @@ import com.icecreamqaq.yuq.entity.Group
 import com.icecreamqaq.yuq.entity.Member
 import com.icecreamqaq.yuq.message.Message
 import com.icecreamqaq.yuq.mif
-import com.xbaimiao.bot.Config
 import com.xbaimiao.bot.minecraft.Xbaimiao
+import com.xbaimiao.yamlconfig.ConfigMessage
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileOutputStream
@@ -14,10 +14,10 @@ import java.io.OutputStreamWriter
 object Operation {
 
 	private val prefix = System.getProperty("user.dir") + File.separator + "GroupAdmin" + File.separator
-	val configYml = Config("${prefix}config.yml")
+	val configYml = ConfigMessage(File("${prefix}config.yml"))
 	val blackYml = File("${prefix}black.yml")
 	val cruxYml = File("${prefix}crux.yml")
-	private val recordYml = Config("${prefix}record.yml")
+	private val recordYml = ConfigMessage(File("${prefix}record.yml"))
 	var help = File("${prefix}help.jpg")
 	var blackList = Xbaimiao.readfile(blackYml.path, "utf-8").split(",")
 	var cruxList = Xbaimiao.readfile(cruxYml.path, "utf-8").split(",")
@@ -54,6 +54,7 @@ object Operation {
 				message.recall()
 				qq.ban(600)
 				recordYml.set(fromQQ.toString(), "触发了敏感词${s}\\n他的原话为\"$msg\"")
+				recordYml.save()
 				return
 			}
 		}

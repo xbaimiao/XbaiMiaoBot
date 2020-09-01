@@ -36,8 +36,10 @@ class EventMsg {
 
 	@Event
 	fun start(e: AppStartEvent) {
-		if (Operation.configYml.isNull) {
+		println(e.javaClass.name)
+		if (Operation.configYml.isEmpty) {
 			Operation.configYml.set("group", "这里写启用的群聊，用,分隔开")
+			Operation.configYml.save()
 		}
 		groupList = Operation.configYml.getString("group").split(",") as ArrayList<String>
 		if (!Operation.cruxYml.exists()) Operation.cruxYml.createNewFile()

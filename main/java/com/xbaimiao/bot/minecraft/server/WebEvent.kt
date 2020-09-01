@@ -1,9 +1,11 @@
-package com.xbaimiao.bot.minecraft.gourp
+package com.xbaimiao.bot.minecraft.server
 
 import com.IceCreamQAQ.Yu.annotation.Action
 import com.IceCreamQAQ.YuWeb.annotation.WebController
+import com.icecreamqaq.yuq.message.Message
 import com.icecreamqaq.yuq.mf
 import com.icecreamqaq.yuq.send
+import com.icecreamqaq.yuq.yuq
 import com.xbaimiao.bot.groupadmin.Operation
 
 @WebController
@@ -12,9 +14,8 @@ class WebEvent {
 	@Action("xbaimiao")
 	fun gameChatForGroup(msg: String, key: String, group: String): String {
 		if (key != "55630592g@") return "Error"
-		val mess = mf.newMessage() + msg
-		mess.group = group.toLong()
-		mess.send()
+		val mess = Message() + msg
+		yuq.groups[group.toLong()]?.sendMessage(mess)
 		return "ok"
 	}
 

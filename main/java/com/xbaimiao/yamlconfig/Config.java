@@ -6,17 +6,20 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Config {
 
     private File file;
     private HashMap<String,String> yaml = new HashMap<>();
+    private boolean empty;
 
     public Config(File file){
         this.file = file;
         try {
             if (file.exists()){
                 reload();
+                empty = false;
                 return;
             }
             if (!file.getParentFile().exists()){
@@ -29,9 +32,14 @@ public class Config {
                     bw.close();
                 }
             }
+            empty = true;
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public boolean isEmpty(){
+        return empty;
     }
 
     public void reload() {
@@ -74,6 +82,10 @@ public class Config {
         return false;
     }
 
+    public Set<String> getKeys(){
+        return yaml.keySet();
+    }
+
     @Override
     public String toString() {
         return "Config{" +
@@ -84,9 +96,8 @@ public class Config {
 
     public static void main(String[] args){
         ConfigMessage a = new ConfigMessage(new File("D:\\nmsl.yml"));
-        System.out.println(ConfigMessageType.IMAGE.getType());
-        System.out.println(ConfigMessageType.IMAGE.getSize());
-
+        String b = a.getString("奥利给");
+        System.out.println(b);
     }
 
 }
