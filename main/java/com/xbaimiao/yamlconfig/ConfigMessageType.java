@@ -7,13 +7,16 @@ public enum ConfigMessageType {
     NULL("NoImpl");
 
     String type;
-    ConfigMessageType(String type){
+
+    ConfigMessageType(String type) {
         this.type = type;
     }
-    public int getSize(){
+
+    public int getSize() {
         return type.length();
     }
-    public String getType(){
+
+    public String getType() {
         return type;
     }
 }

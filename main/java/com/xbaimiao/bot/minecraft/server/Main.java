@@ -12,12 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 
 @EventListener
 public class Main {
@@ -75,7 +71,7 @@ public class Main {
                     yuq.getGroups().get(fromGroup).sendMessage(mf.newMessage().plus(sendCommand(msg)));
                 }
             }
-            if (msg.startsWith("缩短 ")){
+            if (msg.startsWith("缩短 ")) {
                 try {
                     String iP = msg.substring(3).contains("http://") || msg.contains("https://")
                             ? msg.substring(3) : "http://" + msg.substring(3);
@@ -101,8 +97,10 @@ public class Main {
             Rconpassword = (String) config.get("password");
             Rconhost = (String) config.get("host");
             Rconport = Integer.parseInt(config.get("port").toString());
-            QQlist = Xbaimiao.StringorList("@", (String) config.get("QQ"));
-            Grouplist = Xbaimiao.StringorList("@", (String) config.get("Group"));
+            String qq = (String) config.get("QQ");
+            QQlist = Arrays.asList(qq.split("@"));
+            String group = (String) config.get("Group");
+            Grouplist = Arrays.asList(group.split("@"));
         } catch (IOException a) {
             a.printStackTrace();
         }

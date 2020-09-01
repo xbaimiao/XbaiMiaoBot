@@ -3,8 +3,6 @@ package com.xbaimiao.bot.minecraft.server
 import com.IceCreamQAQ.Yu.annotation.Action
 import com.IceCreamQAQ.YuWeb.annotation.WebController
 import com.icecreamqaq.yuq.message.Message
-import com.icecreamqaq.yuq.mf
-import com.icecreamqaq.yuq.send
 import com.icecreamqaq.yuq.yuq
 import com.xbaimiao.bot.groupadmin.Operation
 

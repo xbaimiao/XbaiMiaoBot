@@ -6,10 +6,10 @@ import com.icecreamqaq.yuq.message.MessageItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 
 public class Xbaimiao {
 
@@ -84,84 +84,6 @@ public class Xbaimiao {
         }
     }
 
-    /**
-     * 从文本中制作列表<br>
-     *
-     * @param split  分隔符
-     * @param string 需要分割的文本
-     * @return 分割开的列表
-     */
-    public static List<String> StringorList(String split, String string) {
-        String[] strs = string.split(split);
-        return Arrays.asList(strs);
-    }
-
-    /**
-     * 请求的url链接  返回的是json字符串<br>
-     * 使用方法 String string = Void.getURLContent("http://.....");<br>
-     *
-     * @param urlStr 请求地址
-     * @return 网页源码
-     */
-    public static String getURLContent(String urlStr) {
-        //请求的url
-        URL url;
-        //请求的输入流
-        BufferedReader in = null;
-        //输入流的缓冲
-        StringBuilder sb = new StringBuilder();
-        try {
-            url = new URL(urlStr);
-            in = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
-            String str;
-            //一行一行进行读入
-            while ((str = in.readLine()) != null) {
-                sb.append(str);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (in != null) {
-                    in.close(); //关闭流
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return sb.toString();
-    }
-
-    public static String toUnicode(String str) {
-        String tmp;
-        StringBuffer sb = new StringBuffer(1000);
-        char c;
-        int i, j;
-        sb.setLength(0);
-        for (i = 0; i < str.length(); i++) {
-            c = str.charAt(i);
-            sb.append("\\u");
-            j = (c >>> 8); //取出高8位?
-            tmp = Integer.toHexString(j);
-            if (tmp.length() == 1)
-                sb.append("0");
-            sb.append(tmp);
-            j = (c & 0xFF); //取出低8位?
-            tmp = Integer.toHexString(j);
-            if (tmp.length() == 1)
-                sb.append("0");
-            sb.append(tmp);
-        }
-        return new String(sb);
-    }
-
-    public static String getTime(String format) {
-        Long timeStamp = System.currentTimeMillis();  //获取当前时间戳
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        return sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp))));
-
-    }
-
     public static void writerfile(String path, String encoding, String content) {
         try {
             File file = new File(path);
@@ -231,30 +153,6 @@ public class Xbaimiao {
         }
 
         return string;
-    }
-
-    public static String ChangeUTFToISO(String serverurlUTF) {
-        StringBuilder resultStr = new StringBuilder();
-        for (int i = 0; i < serverurlUTF.length(); i++) {
-            char c = serverurlUTF.charAt(i);
-            if (c <= 255) {
-                resultStr.append(c);
-            } else {
-                byte[] b;
-                try {
-                    b = String.valueOf(c).getBytes(StandardCharsets.UTF_8);
-                } catch (Exception ex) {
-                    b = new byte[0];
-                }
-                for (int value : b) {
-                    int k = value;
-                    if (k < 0)
-                        k += 256;
-                    resultStr.append("%").append(Integer.toHexString(k).toUpperCase());
-                }
-            }
-        }
-        return resultStr.toString();
     }
 
 }

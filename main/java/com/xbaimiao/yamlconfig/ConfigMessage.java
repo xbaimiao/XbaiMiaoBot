@@ -6,18 +6,18 @@ import com.icecreamqaq.yuq.message.*;
 import java.io.File;
 import java.util.ArrayList;
 
-public class ConfigMessage extends Config{
+public class ConfigMessage extends Config {
 
     public ConfigMessage(File file) {
         super(file);
     }
 
-    public Message getMessage(String key){
+    public Message getMessage(String key) {
         String stringMessage = super.getString(key);
         String[] msgList = stringMessage.split("\\|");
         MessageItemFactory mif = FunKt.getMif();
         Message message = new Message();
-        for (String msg : msgList){
+        for (String msg : msgList) {
             if (msg.startsWith(ConfigMessageType.AT.getType())) {
                 message.plus(mif.at(Long.parseLong(msg.substring(ConfigMessageType.AT.getSize()))));
                 continue;
@@ -54,7 +54,7 @@ public class ConfigMessage extends Config{
             }
             msg.append(s.toPath()).append("|");
         }
-        super.set(key, msg.substring(0,msg.toString().length() - 1));
+        super.set(key, msg.substring(0, msg.toString().length() - 1));
         super.save();
     }
 }
