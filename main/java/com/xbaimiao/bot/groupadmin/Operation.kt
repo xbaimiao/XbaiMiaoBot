@@ -21,6 +21,7 @@ object Operation {
 	var help = File("${prefix}help.jpg")
 	var blackList = Xbaimiao.readfile(blackYml.path, "utf-8").split(",")
 	var cruxList = Xbaimiao.readfile(cruxYml.path, "utf-8").split(",")
+
 	@JvmStatic
 	fun isAdmin(long: Long): Boolean = EventMsg.adminList.contains(long)
 

@@ -52,6 +52,9 @@ public class ConfigMessage extends Config {
                 msg.append(ConfigMessageType.IMAGE.getType()).append(((Image) s).getUrl()).append("|");
                 continue;
             }
+            if (s instanceof XmlEx){
+
+            }
             msg.append(s.toPath()).append("|");
         }
         super.set(key, msg.substring(0, msg.toString().length() - 1));

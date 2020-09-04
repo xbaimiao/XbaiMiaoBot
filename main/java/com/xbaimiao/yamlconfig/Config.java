@@ -35,12 +35,6 @@ public class Config {
         }
     }
 
-    public static void main(String[] args) {
-        ConfigMessage a = new ConfigMessage(new File("D:\\nmsl.yml"));
-        String b = a.getString("奥利给");
-        System.out.println(b);
-    }
-
     public boolean isEmpty() {
         return empty;
     }
@@ -62,10 +56,10 @@ public class Config {
     }
 
     public String getString(String key) {
-        return yaml.get(key) == null ? "" : yaml.get(key);
+        return yaml.getOrDefault(key,null);
     }
 
-    public void remove(String key){
+    public void remove(String key) {
         yaml.remove(key);
     }
 
