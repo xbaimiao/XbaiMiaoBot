@@ -6,6 +6,7 @@ import com.icecreamqaq.yuq.entity.Group;
 import com.icecreamqaq.yuq.entity.Member;
 import com.icecreamqaq.yuq.event.GroupMessageEvent;
 import com.icecreamqaq.yuq.message.Message;
+import com.icecreamqaq.yuq.message.MessageItem;
 import com.icecreamqaq.yuq.message.XmlEx;
 import com.xbaimiao.bot.groupadmin.Operation;
 import com.xbaimiao.bot.minecraft.Xbaimiao;
@@ -28,6 +29,13 @@ public class QA {
     @Event
     public void eventKeys(GroupMessageEvent event) {
         String msg = Xbaimiao.getMsg(event.getMessage());
+        for (MessageItem s : event.getMessage().getBody()) {
+            if (s instanceof XmlEx){
+                System.out.println(((XmlEx) s).getServiceId());
+                System.out.println(((XmlEx) s).getValue());
+            }
+        }
+
         Member qq = event.getSender();
         long qqId = qq.getId();
         Group group = event.getGroup();

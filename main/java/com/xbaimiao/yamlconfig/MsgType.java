@@ -1,14 +1,16 @@
 package com.xbaimiao.yamlconfig;
 
-public enum ConfigMessageType {
+public enum MsgType {
     FACE("face_"),
     IMAGE("image_"),
     AT("At_"),
+    XML("xml_"),
+    JSONEX("jsonex_"),
     NULL("NoImpl");
 
     String type;
 
-    ConfigMessageType(String type) {
+    MsgType(String type) {
         this.type = type;
     }
 

@@ -18,16 +18,28 @@ public class ConfigMessage extends Config {
         MessageItemFactory mif = FunKt.getMif();
         Message message = new Message();
         for (String msg : msgList) {
-            if (msg.startsWith(ConfigMessageType.AT.getType())) {
-                message.plus(mif.at(Long.parseLong(msg.substring(ConfigMessageType.AT.getSize()))));
+            if (msg.startsWith(MsgType.AT.getType())) {
+                message.plus(mif.at(Long.parseLong(msg.substring(MsgType.AT.getSize()))));
                 continue;
             }
-            if (msg.startsWith(ConfigMessageType.IMAGE.getType())) {
-                message.plus(mif.image(msg.substring(ConfigMessageType.IMAGE.getSize())));
+            if (msg.startsWith(MsgType.IMAGE.getType())) {
+                message.plus(mif.image(msg.substring(MsgType.IMAGE.getSize())));
                 continue;
             }
-            if (msg.startsWith(ConfigMessageType.FACE.getType())) {
-                message.plus(mif.face(Integer.parseInt(msg.substring(ConfigMessageType.FACE.getSize()))));
+            if (msg.startsWith(MsgType.FACE.getType())) {
+                message.plus(mif.face(Integer.parseInt(msg.substring(MsgType.FACE.getSize()))));
+                continue;
+            }
+            if (msg.startsWith(MsgType.XML.getType())){
+                String mSg = msg.substring(MsgType.XML.getSize());
+                String[] args = mSg.split(",");
+                int id = Integer.parseInt(args[0].substring(4));
+                String xml = args[1].substring(6,args[1].length() - 1);
+                message.plus(mif.xmlEx(id,xml));
+                continue;
+            }
+            if (msg.startsWith(MsgType.JSONEX.getType())){
+                message.plus(mif.jsonEx(msg.substring(MsgType.JSONEX.getSize())));
                 continue;
             }
             message.plus(msg);
@@ -39,25 +51,28 @@ public class ConfigMessage extends Config {
         ArrayList<MessageItem> list = message.getBody();
         StringBuilder msg = new StringBuilder();
         for (MessageItem s : list) {
-            if (s.toPath().equals(ConfigMessageType.NULL.getType())) continue;
-            if (s.toPath().startsWith(ConfigMessageType.AT.getType())) {
+            if (s.toPath().equals(MsgType.NULL.getType())) continue;
+            if (s.toPath().startsWith(MsgType.AT.getType())) {
                 msg.append(s.toPath()).append("|");
                 continue;
             }
             if (s instanceof Face) {
-                msg.append(ConfigMessageType.FACE.getType()).append(((Face) s).getFaceId()).append("|");
+                msg.append(MsgType.FACE.getType()).append(((Face) s).getFaceId()).append("|");
                 continue;
             }
             if (s instanceof Image) {
-                msg.append(ConfigMessageType.IMAGE.getType()).append(((Image) s).getUrl()).append("|");
+                msg.append(MsgType.IMAGE.getType()).append(((Image) s).getUrl()).append("|");
                 continue;
             }
             if (s instanceof XmlEx){
-
+                msg.append(MsgType.XML.getType()).append("{id:").append(((XmlEx) s).getServiceId()).append(",value:").append(((XmlEx) s).getValue()).append("}|");
+                continue;
+            }
+            if (s instanceof JsonEx){
+                msg.append(MsgType.JSONEX.getType()).append(((JsonEx) s).getValue()).append("|");
             }
             msg.append(s.toPath()).append("|");
         }
         super.set(key, msg.substring(0, msg.toString().length() - 1));
-        super.save();
     }
 }
