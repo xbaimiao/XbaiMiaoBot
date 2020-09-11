@@ -5,15 +5,14 @@ import com.icecreamqaq.yuq.message.Message;
 import com.icecreamqaq.yuq.message.MessageItem;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.Random;
 
 public class Xbaimiao {
-
-    private static Properties config;
 
     public static long getAt(Message message) {
         for (MessageItem item : message.getBody()) {
@@ -65,7 +64,7 @@ public class Xbaimiao {
      * @param encoding 文本编码
      * @return 返回文件内容
      */
-    public static String readfile(String path, String encoding) {
+    public static String readFile(String path, String encoding) {
         StringBuilder sb = new StringBuilder();
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), encoding)); //构造一个BufferedReader类来读取文件
@@ -84,24 +83,6 @@ public class Xbaimiao {
         }
     }
 
-    public static void writerfile(String path, String encoding, String content) {
-        try {
-            File file = new File(path);
-            File ParentFile = file.getParentFile();
-            if (!ParentFile.exists()) {
-                ParentFile.mkdirs();
-            }
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), encoding));
-            bw.write(content);
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @NotNull
     public static String getMsg(Message message) {
         ArrayList<MessageItem> list = message.getBody();
@@ -113,46 +94,6 @@ public class Xbaimiao {
             msg.append(s.toPath());
         }
         return msg.toString();
-    }
-
-    @NotNull
-
-    public static void saveconfig(String path) throws IOException {
-        FileOutputStream oFile = new FileOutputStream(new File(path));
-        config.store(oFile, null);
-        oFile.close();
-    }
-
-    public static void writeConfig(String path, String key, String value) throws IOException {
-        config = new Properties();
-        File file = new File(path);
-        File ParentFile = file.getParentFile();
-        if (!ParentFile.exists()) {
-            ParentFile.mkdirs();
-        }
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-        FileInputStream in = new FileInputStream(file);
-        config.load(in);
-        config.put(key, value);
-        saveconfig(path);
-        in.close();
-    }
-
-    public static String readconfig(String path, String key) throws IOException {
-        config = new Properties();
-        File file = new File(path);
-        if (!file.exists()) {
-            return "该文件不存在";
-        }
-        config.load(new FileInputStream(file));
-        String string = (String) config.get(key);
-        if (string == null) {
-            return "读取配置项为空";
-        }
-
-        return string;
     }
 
 }

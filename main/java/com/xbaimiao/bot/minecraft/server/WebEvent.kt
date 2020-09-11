@@ -9,17 +9,17 @@ import com.xbaimiao.bot.groupadmin.Operation
 @WebController
 class WebEvent {
 
-	@Action("xbaimiao")
-	fun gameChatForGroup(msg: String, key: String, group: String): String {
-		if (key != "55630592g@") return "Error"
-		val mess = Message() + msg
-		yuq.groups[group.toLong()]?.sendMessage(mess)
-		return "ok"
-	}
+    @Action("xbaimiao")
+    fun gameChatForGroup(msg: String, key: String, group: String): String {
+        if (key != "55630592g@") return "Error"
+        val mess = Message() + msg
+        yuq.groups[group.toLong()]?.sendMessage(mess)
+        return "ok"
+    }
 
-	@Action("blacklist")
-	fun list(): String {
-		return "Currently, there are ${Operation.blackList.size}" + Operation.blackList.toString()
-	}
+    @Action("blacklist")
+    fun list(): String {
+        return "Currently, there are ${Operation.blackList.size}" + Operation.blackList.toString()
+    }
 
 }

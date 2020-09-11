@@ -30,15 +30,15 @@ public class ConfigMessage extends Config {
                 message.plus(mif.face(Integer.parseInt(msg.substring(MsgType.FACE.getSize()))));
                 continue;
             }
-            if (msg.startsWith(MsgType.XML.getType())){
+            if (msg.startsWith(MsgType.XML.getType())) {
                 String mSg = msg.substring(MsgType.XML.getSize());
                 String[] args = mSg.split(",");
                 int id = Integer.parseInt(args[0].substring(4));
-                String xml = args[1].substring(6,args[1].length() - 1);
-                message.plus(mif.xmlEx(id,xml));
+                String xml = args[1].substring(6, args[1].length() - 1);
+                message.plus(mif.xmlEx(id, xml));
                 continue;
             }
-            if (msg.startsWith(MsgType.JSONEX.getType())){
+            if (msg.startsWith(MsgType.JSONEX.getType())) {
                 message.plus(mif.jsonEx(msg.substring(MsgType.JSONEX.getSize())));
                 continue;
             }
@@ -64,11 +64,11 @@ public class ConfigMessage extends Config {
                 msg.append(MsgType.IMAGE.getType()).append(((Image) s).getUrl()).append("|");
                 continue;
             }
-            if (s instanceof XmlEx){
+            if (s instanceof XmlEx) {
                 msg.append(MsgType.XML.getType()).append("{id:").append(((XmlEx) s).getServiceId()).append(",value:").append(((XmlEx) s).getValue()).append("}|");
                 continue;
             }
-            if (s instanceof JsonEx){
+            if (s instanceof JsonEx) {
                 msg.append(MsgType.JSONEX.getType()).append(((JsonEx) s).getValue()).append("|");
             }
             msg.append(s.toPath()).append("|");

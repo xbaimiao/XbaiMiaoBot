@@ -1,4 +1,4 @@
-package com.xbaimiao.bot.minecraft.server;
+package com.xbaimiao.bot.minecraft.server.rcon;
 
 import com.xbaimiao.bot.minecraft.Xbaimiao;
 
