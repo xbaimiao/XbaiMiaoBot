@@ -3,6 +3,7 @@ package com.xbaimiao.bot.minecraft.server;
 import com.IceCreamQAQ.Yu.annotation.Event;
 import com.IceCreamQAQ.Yu.annotation.EventListener;
 import com.IceCreamQAQ.Yu.event.events.AppStartEvent;
+import com.icecreamqaq.yuq.FunKt;
 import com.icecreamqaq.yuq.entity.Group;
 import com.icecreamqaq.yuq.event.GroupMessageEvent;
 import com.icecreamqaq.yuq.message.Message;
@@ -15,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -28,7 +30,6 @@ public class Main {
         while ((cmd = scan.nextLine()) != null) {
             switch (cmd) {
                 case "stop": {
-                    System.out.println("[INFO] 机器人已关闭");
                     stop();
                     break;
                 }
@@ -51,7 +52,8 @@ public class Main {
 
     private static void stop() {
         ConfigList.saveAll();
-        cmd.stop();
+        cmd.interrupt();
+        System.out.println("[INFO] 机器人已关闭");
         System.exit(-1);
     }
 

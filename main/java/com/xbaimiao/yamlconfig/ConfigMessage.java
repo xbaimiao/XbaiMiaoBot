@@ -14,6 +14,9 @@ public class ConfigMessage extends Config {
 
     public Message getMessage(String key) {
         String stringMessage = super.getString(key);
+        if (stringMessage == null){
+            return new Message().plus("目标Key值为空");
+        }
         String[] msgList = stringMessage.split("\\|");
         MessageItemFactory mif = FunKt.getMif();
         Message message = new Message();
@@ -73,6 +76,7 @@ public class ConfigMessage extends Config {
             }
             msg.append(s.toPath()).append("|");
         }
-        super.set(key, msg.substring(0, msg.toString().length() - 1));
+        String vault = msg.toString().length() < 2 ? msg.toString() : msg.substring(0, msg.toString().length() - 1);
+        super.set(key, vault);
     }
 }
