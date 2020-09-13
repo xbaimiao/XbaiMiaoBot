@@ -49,6 +49,9 @@ public class Config {
             while ((s = br.readLine()) != null) {
                 if (s.contains(": \"")) {
                     String[] args = s.split(": \"");
+                    if (args.length < 2){
+                        continue;
+                    }
                     if (args[1].endsWith("\"")) {
                         yaml.put(args[0], args[1].substring(0, args[1].length() - 1).replace("\"", "'"));
                         continue;
@@ -70,6 +73,14 @@ public class Config {
         return Integer.parseInt(yaml.get(key));
     }
 
+    public long getLong(String key){
+        return Long.parseLong(yaml.get(key));
+    }
+
+    public boolean getBoolean(String key){
+        return yaml.get(key).equals("true");
+    }
+
     public void remove(String key) {
         yaml.remove(key);
     }
@@ -82,6 +93,18 @@ public class Config {
 
     public void set(String key, String vault) {
         yaml.put(key, vault);
+    }
+
+    public void set(String key, Integer vault){
+        yaml.put(key,vault.toString());
+    }
+
+    public void set(String key, Long vault){
+        yaml.put(key,vault.toString());
+    }
+
+    public void set(String key, Boolean vault){
+        yaml.put(key,vault.toString());
     }
 
     public boolean save() {

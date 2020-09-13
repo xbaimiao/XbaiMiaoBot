@@ -4,8 +4,8 @@ import com.IceCreamQAQ.Yu.annotation.Event;
 import com.IceCreamQAQ.Yu.annotation.EventListener;
 import com.icecreamqaq.yuq.FunKt;
 import com.icecreamqaq.yuq.entity.Group;
+import com.icecreamqaq.yuq.entity.Member;
 import com.icecreamqaq.yuq.event.GroupMessageEvent;
-import com.icecreamqaq.yuq.event.MessageRecallEvent;
 import com.icecreamqaq.yuq.message.Message;
 import com.icecreamqaq.yuq.message.MessageItem;
 import com.icecreamqaq.yuq.message.MessageSource;
@@ -20,7 +20,8 @@ import java.util.ArrayList;
 public class No {
 
     static ConfigMessage config = new ConfigMessage(new File(Main.path + "jilu.yml"));
-    static ArrayList<Long> list = new ArrayList<>();
+    static final ArrayList<Long> XML_LIST = new ArrayList<>();
+    static final ArrayList<Long> JSON_LIST = new ArrayList<>();
 
     @Event
     public void chat(GroupMessageEvent e){
@@ -35,16 +36,27 @@ public class No {
             }
         }
         String msg = Xbaimiao.getMsg(e.getMessage());
+        Long qq = e.getSender().getId();
         Group group = e.getGroup();
-        if (list.contains(e.getSender().getId())){
+        if (XML_LIST.contains(qq)){
             group.sendMessage(new Message().plus(FunKt.getMif().xmlEx(1,msg)));
-            list.remove(e.getSender().getId());
+            XML_LIST.remove(qq);
             return;
 
         }
-        if (msg.toUpperCase().equals("XMLCORE")) {
+        if (JSON_LIST.contains(qq)){
+            group.sendMessage(new Message().plus(FunKt.getMif().jsonEx(msg)));
+            JSON_LIST.remove(qq);
+            return;
+        }
+        if (msg.toUpperCase().equals("准备XML")) {
             group.sendMessage(new Message().plus("请输入xml"));
-            list.add(e.getSender().getId());
+            XML_LIST.add(qq);
+        }
+
+        if (msg.toUpperCase().equals("准备JSON")){
+            group.sendMessage(new Message().plus("请输入json"));
+            JSON_LIST.add(qq);
         }
     }
 
