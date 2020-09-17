@@ -36,7 +36,6 @@ class EventMsg {
 
     @Event
     fun start(e: AppStartEvent) {
-        println(e.javaClass.name)
         if (Operation.configYml.isEmpty) {
             Operation.configYml.set("group", "这里写启用的群聊，用,分隔开")
             Operation.configYml.save()

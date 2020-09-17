@@ -26,9 +26,8 @@ public class RconPacket {
      * @param rcon    rcon实例
      * @param type    包类型
      * @param payload 字节组（密码、命令等）
-     * @返回包含响应的RconPacket对象
-     * @抛出IOException
-     * @抛出格式错误的包异常
+     * @return 返回包含响应的RconPacket对象,
+     * @throws IOException 抛出格式错误的包异常
      */
     protected static RconPacket send(Rcon rcon, int type, byte[] payload) throws IOException {
         try {

@@ -12,9 +12,15 @@ public class ConfigMessage extends Config {
         super(file);
     }
 
+    /**
+     * 获取目标key值的 Message 对象
+     *
+     * @param key 键值
+     * @return Message 对象
+     */
     public Message getMessage(String key) {
         String stringMessage = super.getString(key);
-        if (stringMessage == null){
+        if (stringMessage == null) {
             return new Message().plus("目标Key值为空");
         }
         String[] msgList = stringMessage.split("\\|");
@@ -50,6 +56,12 @@ public class ConfigMessage extends Config {
         return message;
     }
 
+    /**
+     * 将目标key值设置为提供的 Message对象
+     *
+     * @param key     键值
+     * @param message Message 对象
+     */
     public void set(String key, Message message) {
         ArrayList<MessageItem> list = message.getBody();
         StringBuilder msg = new StringBuilder();

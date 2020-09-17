@@ -8,7 +8,6 @@ import com.icecreamqaq.yuq.event.GroupMessageEvent;
 import com.icecreamqaq.yuq.message.Message;
 import com.xbaimiao.bot.minecraft.Xbaimiao;
 import com.xbaimiao.bot.minecraft.server.rcon.RconKit;
-import com.xbaimiao.yamlconfig.ConfigList;
 import com.xbaimiao.yamlconfig.ConfigMessage;
 
 import java.io.BufferedReader;
@@ -49,7 +48,6 @@ public class Main {
     private static List<String> Grouplist;
 
     private static void stop() {
-        ConfigList.saveAll();
         cmd.interrupt();
         System.out.println("[INFO] 机器人已关闭");
         System.exit(-1);

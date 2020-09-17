@@ -1,6 +1,7 @@
 package com.xbaimiao.yamlconfig;
 
 public enum MsgType {
+
     FACE("face_"),
     IMAGE("image_"),
     AT("At_"),
