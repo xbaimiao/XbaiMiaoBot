@@ -1,9 +1,6 @@
 package com.xbaimiao.plugins;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import java.util.zip.ZipEntry;
@@ -16,6 +13,8 @@ public class Plugin {
     private String version;
     private String author;
     private boolean isPlugin;
+    private boolean hasConfig;
+    private InputStream configInput = null;
 
     protected Plugin(File plugin) {
         try {
@@ -25,6 +24,11 @@ public class Plugin {
             if (pluginYML == null) {
                 isPlugin = false;
                 return;
+            }
+            ZipEntry configYml = zipFile.getEntry("config.yml");
+            hasConfig = configYml != null;
+            if (hasConfig) {
+                configInput = zipFile.getInputStream(configYml);
             }
             isPlugin = true;
             ReadConfig config = new ReadConfig(zipFile.getInputStream(pluginYML));
@@ -41,6 +45,17 @@ public class Plugin {
 
     public boolean isPlugin() {
         return isPlugin;
+    }
+
+    public boolean hasConfig() {
+        return hasConfig;
+    }
+
+    public InputStream getConfigInput() throws ConfigNotFound{
+        if (hasConfig){
+            return configInput;
+        }
+        throw new ConfigNotFound("配置文件未找到");
     }
 
     public String getMain() {

@@ -62,8 +62,7 @@ public class EventTrigger {
                 String dataFile = pluginsPath + File.separator + plugin.getName();
                 if (javaPlugin != null) {
                     yuq.getLogger().info("- Register Plugin: " + plugin.getName() + ".");
-                    javaPlugin.setDataFolder(new File(dataFile));
-                    javaPlugin.setFile(new File(dataFile + File.separator + "config.yml"));
+                    javaPlugin.init(new File(dataFile + File.separator + "config.yml"),new File(dataFile),plugin);
                     javaPlugin.onEnable();
                     yuq.getLogger().info("- Register Plugin: " + plugin.getName() + "  Success!");
                 }

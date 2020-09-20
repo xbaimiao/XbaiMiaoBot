@@ -6,26 +6,60 @@ import com.icecreamqaq.yuq.message.MessageItemFactory;
 import com.xbaimiao.yamlconfig.ConfigMessage;
 import org.slf4j.Logger;
 
-import java.io.File;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public abstract class JavaPlugin {
 
     File dataFolder;
     File file;
     ConfigMessage configMessage = null;
+    Plugin plugin = null;
 
     public JavaPlugin() {
 
     }
 
-    public void setFile(File file) {
-        this.file = file;
-    }
-
+    /**
+     * 机器人启动时调用
+     */
     public void onEnable() {
     }
 
+    /**
+     * 机器人关闭时候调用
+     */
     public void onDisable() {
+    }
+
+    /**
+     * 将jar内的 config.yml 文件保存至插件文件夹
+     */
+    public void saveDefaultConfig() {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(plugin.getConfigInput()));
+            try {
+                if (!dataFolder.exists()){
+                    dataFolder.mkdirs();
+                }
+                if (!file.exists()){
+                    file.createNewFile();
+                }
+                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));
+                String s;
+                StringBuilder sb = new StringBuilder();
+                while ((s = br.readLine()) != null){
+                    sb.append(s);
+                }
+                bw.write(sb.toString());
+                bw.close();
+                br.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (ConfigNotFound configNotFound) {
+            configNotFound.printStackTrace();
+        }
     }
 
     /**
@@ -41,14 +75,37 @@ public abstract class JavaPlugin {
     }
 
     /**
+     * 保存配置文件至文件
+     */
+    public void saveConfig() {
+        if (configMessage == null) {
+            configMessage = new ConfigMessage(file);
+        }
+        configMessage.save();
+    }
+
+    /**
+     * 将文件的内容重载到Config
+     */
+    public void reloadConfig() {
+        if (configMessage == null) {
+            configMessage = new ConfigMessage(file);
+        }
+        configMessage.reload();
+    }
+
+    /**
      * @return 插件文件夹
      */
     public File getDataFolder() {
         return dataFolder;
     }
 
-    public void setDataFolder(File folder) {
+
+    public void init(File config, File folder , Plugin plugin) {
+        this.file = config;
         this.dataFolder = folder;
+        this.plugin = plugin;
     }
 
     /**
@@ -69,6 +126,7 @@ public abstract class JavaPlugin {
 
     /**
      * 日志输出器
+     *
      * @return 日志输出器
      */
     public Logger getLogger() {
