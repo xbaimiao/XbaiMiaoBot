@@ -19,21 +19,22 @@ public class EventTrigger {
 
     @Event
     public void GroupMessageEvent(GroupMessageEvent event) {
-        yuq.eventList.forEach((l) ->{
-            l.GroupMessageEvent(event.getGroup(), event.getMessage(), event.getSender(), Xbaimiao.getMsg(event.getMessage()));
+        yuq.MESSAGE_EVENT.forEach((l) ->{
+            com.xbaimiao.plugins.event.GroupMessageEvent e = new com.xbaimiao.plugins.event.GroupMessageEvent(event);
+            l.GroupMessageEvent(e);
         });
     }
 
     @Event
     public void PrivateMessageEvent(PrivateMessageEvent event){
-        yuq.eventList.forEach((l ->
+        yuq.MESSAGE_EVENT.forEach((l ->
                 l.PrivateMessageEvent(event.getSender(),event.getMessage(),Xbaimiao.getMsg(event.getMessage())))
         );
     }
 
     @Event
     public void MessageRecallEvent(MessageRecallEvent event){
-        yuq.eventList.forEach( (l) ->
+        yuq.MESSAGE_EVENT.forEach( (l) ->
                 l.MessageRecallEvent(event.getSender(),event.getOperator(),event.getMessageId())
         );
     }
@@ -41,7 +42,11 @@ public class EventTrigger {
 
     @Event
     public void start(AppStartEvent event) {
-        File[] files = new File(pluginsPath).listFiles();
+        File pluginsFile = new File(pluginsPath);
+        if (!pluginsFile.exists()){
+            pluginsFile.mkdirs();
+        }
+        File[] files = pluginsFile.listFiles();
         if (files != null) {
             List<Plugin> plugins = new ArrayList<>();
             for (File file : files) {

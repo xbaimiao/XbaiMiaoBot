@@ -4,18 +4,16 @@ import com.icecreamqaq.yuq.entity.Contact;
 import com.icecreamqaq.yuq.entity.Group;
 import com.icecreamqaq.yuq.entity.Member;
 import com.icecreamqaq.yuq.message.Message;
+import com.xbaimiao.plugins.event.GroupMessageEvent;
 
 public interface Listener {
 
     /**
      * 群聊事件
      *
-     * @param group   群组对象
-     * @param message 消息对象
-     * @param sender  成员对象
-     * @param msg     消息文本内容
+     * @param event  监听器
      */
-    void GroupMessageEvent(Group group, Message message, Member sender, String msg);
+    void GroupMessageEvent(GroupMessageEvent event);
 
     /**
      * 私聊事件

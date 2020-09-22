@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class yuq {
 
     private static final Logger logger = LoggerFactory.getLogger(JavaPlugin.class);
-    protected static ArrayList<Listener> eventList = new ArrayList<>();
+    protected static final ArrayList<Listener> MESSAGE_EVENT = new ArrayList<>();
 
     /**
      * 注册一个监听器
@@ -16,8 +16,8 @@ public class yuq {
      * @param listener Listener对象
      */
     public static void regEvent(Listener listener) {
-        if (!eventList.contains(listener)) {
-            eventList.add(listener);
+        if (!MESSAGE_EVENT.contains(listener)) {
+            MESSAGE_EVENT.add(listener);
         }
     }
 
