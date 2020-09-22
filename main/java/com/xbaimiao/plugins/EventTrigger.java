@@ -4,13 +4,13 @@ import com.IceCreamQAQ.Yu.annotation.Event;
 import com.IceCreamQAQ.Yu.annotation.EventListener;
 import com.IceCreamQAQ.Yu.event.events.AppStartEvent;
 import com.icecreamqaq.yuq.event.GroupMessageEvent;
-import com.icecreamqaq.yuq.event.MessageRecallEvent;
-import com.icecreamqaq.yuq.event.PrivateMessageEvent;
-import com.xbaimiao.bot.minecraft.Xbaimiao;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @EventListener
 public class EventTrigger {
@@ -18,25 +18,14 @@ public class EventTrigger {
     protected static String pluginsPath = System.getProperty("user.dir") + File.separator + "plugins";
 
     @Event
-    public void GroupMessageEvent(GroupMessageEvent event) {
-        yuq.MESSAGE_EVENT.forEach((l) ->{
-            com.xbaimiao.plugins.event.GroupMessageEvent e = new com.xbaimiao.plugins.event.GroupMessageEvent(event);
-            l.GroupMessageEvent(e);
-        });
-    }
-
-    @Event
-    public void PrivateMessageEvent(PrivateMessageEvent event){
-        yuq.MESSAGE_EVENT.forEach((l ->
-                l.PrivateMessageEvent(event.getSender(),event.getMessage(),Xbaimiao.getMsg(event.getMessage())))
-        );
-    }
-
-    @Event
-    public void MessageRecallEvent(MessageRecallEvent event){
-        yuq.MESSAGE_EVENT.forEach( (l) ->
-                l.MessageRecallEvent(event.getSender(),event.getOperator(),event.getMessageId())
-        );
+    public void d(GroupMessageEvent e){
+        for (Map.Entry<Class<?>,Method> map : yuq.GROUP_MESSAGE.entrySet()){
+            try {
+                map.getValue().invoke(map.getKey().newInstance(),new com.xbaimiao.plugins.event.GroupMessageEvent(e));
+            } catch (IllegalAccessException | InvocationTargetException | InstantiationException illegalAccessException) {
+                illegalAccessException.printStackTrace();
+            }
+        }
     }
 
 

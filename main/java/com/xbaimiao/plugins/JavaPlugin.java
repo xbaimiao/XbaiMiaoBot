@@ -36,6 +36,9 @@ public abstract class JavaPlugin {
      * 将jar内的 config.yml 文件保存至插件文件夹
      */
     public void saveDefaultConfig() {
+        if (file.exists()){
+            return;
+        }
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(plugin.getConfigInput()));
             try {

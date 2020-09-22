@@ -6,5 +6,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface EventListener {
-    String value() default "tracy";
+    String value() default "C";
 }
