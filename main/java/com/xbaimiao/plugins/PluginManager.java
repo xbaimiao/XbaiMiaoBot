@@ -24,18 +24,18 @@ public class PluginManager {
         }
     }
 
-    protected JavaPlugin getInstance(String main,String name) {
+    protected JavaPlugin getInstance(String main) {
         try {
             Class<?> clas = urlClassLoader.loadClass(main);
             Object in = clas.newInstance();
             if (in instanceof JavaPlugin) {
                 return (JavaPlugin) in;
             }
-            yuq.getLogger().error("- Register Plugin: " + name + " 主类未继承自JavaPlugin");
-            return null;
+            throw new JarNotisPlugin(clas.getName() + "未继承自JavaPlugin");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
 }

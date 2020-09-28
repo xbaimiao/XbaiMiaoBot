@@ -1,4 +1,4 @@
-package com.xbaimiao.bot.minecraft;
+package com.xbaimiao.plugins;
 
 import com.icecreamqaq.yuq.message.At;
 import com.icecreamqaq.yuq.message.Message;

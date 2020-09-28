@@ -36,22 +36,22 @@ public abstract class JavaPlugin {
      * 将jar内的 config.yml 文件保存至插件文件夹
      */
     public void saveDefaultConfig() {
-        if (file.exists()){
+        if (file.exists()) {
             return;
         }
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(plugin.getConfigInput()));
             try {
-                if (!dataFolder.exists()){
+                if (!dataFolder.exists()) {
                     dataFolder.mkdirs();
                 }
-                if (!file.exists()){
+                if (!file.exists()) {
                     file.createNewFile();
                 }
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));
                 String s;
                 StringBuilder sb = new StringBuilder();
-                while ((s = br.readLine()) != null){
+                while ((s = br.readLine()) != null) {
                     sb.append(s);
                 }
                 bw.write(sb.toString());
@@ -105,7 +105,7 @@ public abstract class JavaPlugin {
     }
 
 
-    public void init(File config, File folder , Plugin plugin) {
+    public void init(File config, File folder, Plugin plugin) {
         this.file = config;
         this.dataFolder = folder;
         this.plugin = plugin;

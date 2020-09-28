@@ -1,11 +1,10 @@
 package com.xbaimiao.plugins;
 
-public class ConfigNotFound extends Exception{
+public class ConfigNotFound extends Exception {
 
-    public ConfigNotFound(String message) {
+    protected ConfigNotFound(String message) {
         super(message);
     }
-
 
 
 }

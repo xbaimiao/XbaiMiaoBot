@@ -15,8 +15,10 @@ public class Plugin {
     private boolean isPlugin;
     private boolean hasConfig;
     private InputStream configInput = null;
+    private final File file;
 
     protected Plugin(File plugin) {
+        file = plugin;
         try {
             JarFile zipFile = new JarFile(plugin);
             JarInputStream in = new JarInputStream(new BufferedInputStream(new FileInputStream(plugin)));
@@ -51,11 +53,11 @@ public class Plugin {
         return hasConfig;
     }
 
-    public InputStream getConfigInput() throws ConfigNotFound{
-        if (hasConfig){
+    public InputStream getConfigInput() throws ConfigNotFound {
+        if (hasConfig) {
             return configInput;
         }
-        throw new ConfigNotFound("配置文件未找到");
+        throw new ConfigNotFound( getMain() + "配置文件未找到");
     }
 
     public String getMain() {
@@ -76,5 +78,9 @@ public class Plugin {
 
     public String getVersion() {
         return version;
+    }
+
+    public File getFile() {
+        return file;
     }
 }
