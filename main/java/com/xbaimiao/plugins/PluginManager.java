@@ -7,12 +7,10 @@ import java.util.List;
 
 public class PluginManager {
 
-    private List<Plugin> plugins;
     private URLClassLoader urlClassLoader;
 
     protected PluginManager(List<Plugin> plugins) {
         try {
-            this.plugins = plugins;
             URL[] urls = new URL[plugins.size()];
             for (int i = 0; i < plugins.size(); i++) {
                 String filePath = plugins.get(i).getJar();
@@ -31,7 +29,7 @@ public class PluginManager {
             if (in instanceof JavaPlugin) {
                 return (JavaPlugin) in;
             }
-            throw new JarNotisPlugin(clas.getName() + "未继承自JavaPlugin");
+            throw new FileisNotPlugin(clas.getName() + "未继承自JavaPlugin");
         } catch (Exception e) {
             e.printStackTrace();
         }

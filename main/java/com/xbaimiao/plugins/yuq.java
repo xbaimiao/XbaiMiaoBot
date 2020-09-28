@@ -88,6 +88,9 @@ public class yuq {
                             GROUP_New.put(listenerClass, method);
                             break;
                         }
+                        default:{
+                            getLogger().error(listenerClass.getName() + "类的" + method.getName() + "方法 , 未找到监听类型，取消注册该方法");
+                        }
                     }
 
                 }
