@@ -16,6 +16,10 @@ public class Start {
         File settings = new File(System.getProperty("user.dir") + File.separator + "settings.yml");
         Config config = new Config(settings);
         if (config.isEmpty()){
+            File plugins = new File(System.getProperty("user.dir") + File.separator + "plugins");
+            if (!plugins.exists()){
+                plugins.mkdirs();
+            }
             config.set("QQ账号",123456789);
             config.set("QQ密码",123456);
             config.save();

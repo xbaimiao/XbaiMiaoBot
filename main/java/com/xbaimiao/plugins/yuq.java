@@ -15,6 +15,8 @@ public class yuq {
     protected static final HashMap<Class<?>, Method> GROUP_MESSAGE = new HashMap<>(); //群聊消息
     protected static final HashMap<Class<?>, Method> PRIVATE_MESSAGE = new HashMap<>(); //私聊消息
     protected static final HashMap<Class<?>, Method> RECALL_MESSAGE = new HashMap<>(); //撤回消息
+    protected static final HashMap<Class<?>, Method> GROUP_Reacll = new HashMap<>(); //群组撤回消息
+    protected static final HashMap<Class<?>, Method> Private_Reacll = new HashMap<>(); //私聊撤回消息
     protected static final HashMap<Class<?>, Method> FriendAdd = new HashMap<>(); //好友新增
     protected static final HashMap<Class<?>, Method> FriendDelete = new HashMap<>(); //好友删除
     protected static final HashMap<Class<?>, Method> GROUP_JOIN = new HashMap<>(); //加群事件
@@ -86,6 +88,14 @@ public class yuq {
                         }
                         case "com.xbaimiao.plugins.event.GroupMemberRequestEvent":{
                             GROUP_New.put(listenerClass, method);
+                            break;
+                        }
+                        case "com.xbaimiao.plugins.event.GroupRecallEvent":{
+                            GROUP_Reacll.put(listenerClass, method);
+                            break;
+                        }
+                        case "com.xbaimiao.plugins.event.PrivateRecallEvent":{
+                            Private_Reacll.put(listenerClass, method);
                             break;
                         }
                         default:{

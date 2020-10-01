@@ -112,6 +112,22 @@ public class EventTrigger {
         }
     }
 
+    @Event
+    public void ban(GroupRecallEvent event){
+        for (Map.Entry<Class<?> ,Method> map : yuq.GROUP_Reacll.entrySet()){
+            com.xbaimiao.plugins.event.GroupRecallEvent v = new com.xbaimiao.plugins.event.GroupRecallEvent(event);
+            run(map,v);
+        }
+    }
+
+    @Event
+    public void ban(PrivateRecallEvent event){
+        for (Map.Entry<Class<?> ,Method> map : yuq.Private_Reacll.entrySet()){
+            com.xbaimiao.plugins.event.PrivateRecallEvent v = new com.xbaimiao.plugins.event.PrivateRecallEvent(event);
+            run(map,v);
+        }
+    }
+
     private static void run(Map.Entry<Class<?>, Method> map,Object v){
         try {
             map.getValue().invoke(map.getKey().newInstance(), v);
