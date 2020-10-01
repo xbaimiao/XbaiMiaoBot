@@ -60,7 +60,7 @@ public abstract class JavaPlugin {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } catch (ConfigNotFound configNotFound) {
+        } catch (ConfigNotFoundError configNotFound) {
             configNotFound.printStackTrace();
         }
     }
@@ -72,7 +72,7 @@ public abstract class JavaPlugin {
      */
     public ConfigMessage getConfig() {
         if (configMessage == null) {
-            return configMessage = new ConfigMessage(file);
+            return (configMessage = new ConfigMessage(file));
         }
         return configMessage;
     }

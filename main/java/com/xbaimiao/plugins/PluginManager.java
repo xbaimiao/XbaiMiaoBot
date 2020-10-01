@@ -29,7 +29,7 @@ public class PluginManager {
             if (in instanceof JavaPlugin) {
                 return (JavaPlugin) in;
             }
-            throw new FileisNotPlugin(clas.getName() + "未继承自JavaPlugin");
+            throw new FileisNotPluginError(clas.getName() + "未继承自JavaPlugin");
         } catch (Exception e) {
             e.printStackTrace();
         }

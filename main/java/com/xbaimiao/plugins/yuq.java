@@ -12,20 +12,20 @@ import java.util.HashMap;
 
 public class yuq {
 
-    protected static final HashMap<Class<?>, Method> GROUP_MESSAGE = new HashMap<>(); //群聊消息
-    protected static final HashMap<Class<?>, Method> PRIVATE_MESSAGE = new HashMap<>(); //私聊消息
-    protected static final HashMap<Class<?>, Method> RECALL_MESSAGE = new HashMap<>(); //撤回消息
-    protected static final HashMap<Class<?>, Method> GROUP_Reacll = new HashMap<>(); //群组撤回消息
-    protected static final HashMap<Class<?>, Method> Private_Reacll = new HashMap<>(); //私聊撤回消息
-    protected static final HashMap<Class<?>, Method> FriendAdd = new HashMap<>(); //好友新增
-    protected static final HashMap<Class<?>, Method> FriendDelete = new HashMap<>(); //好友删除
-    protected static final HashMap<Class<?>, Method> GROUP_JOIN = new HashMap<>(); //加群事件
-    protected static final HashMap<Class<?>, Method> GROUP_JOIN_Invite = new HashMap<>(); //加群事件 - 邀请
-    protected static final HashMap<Class<?>, Method> GROUP_Leave = new HashMap<>(); //退群事件
-    protected static final HashMap<Class<?>, Method> GROUP_Kick = new HashMap<>(); //被踢事件
-    protected static final HashMap<Class<?>, Method> GROUP_Ban = new HashMap<>(); //群员被禁言事件
-    protected static final HashMap<Class<?>, Method> GROUP_UnBan = new HashMap<>(); //群员被取消禁言事件
-    protected static final HashMap<Class<?>, Method> GROUP_New = new HashMap<>(); //群员被取消禁言事件
+    protected static final HashMap<Listener, Method> GROUP_MESSAGE = new HashMap<>(); //群聊消息
+    protected static final HashMap<Listener, Method> PRIVATE_MESSAGE = new HashMap<>(); //私聊消息
+    protected static final HashMap<Listener, Method> RECALL_MESSAGE = new HashMap<>(); //撤回消息
+    protected static final HashMap<Listener, Method> GROUP_Reacll = new HashMap<>(); //群组撤回消息
+    protected static final HashMap<Listener, Method> Private_Reacll = new HashMap<>(); //私聊撤回消息
+    protected static final HashMap<Listener, Method> FriendAdd = new HashMap<>(); //好友新增
+    protected static final HashMap<Listener, Method> FriendDelete = new HashMap<>(); //好友删除
+    protected static final HashMap<Listener, Method> GROUP_JOIN = new HashMap<>(); //加群事件
+    protected static final HashMap<Listener, Method> GROUP_JOIN_Invite = new HashMap<>(); //加群事件 - 邀请
+    protected static final HashMap<Listener, Method> GROUP_Leave = new HashMap<>(); //退群事件
+    protected static final HashMap<Listener, Method> GROUP_Kick = new HashMap<>(); //被踢事件
+    protected static final HashMap<Listener, Method> GROUP_Ban = new HashMap<>(); //群员被禁言事件
+    protected static final HashMap<Listener, Method> GROUP_UnBan = new HashMap<>(); //群员被取消禁言事件
+    protected static final HashMap<Listener, Method> GROUP_New = new HashMap<>(); //群员被取消禁言事件
 
     private static final Logger logger = LoggerFactory.getLogger(JavaPlugin.class);
 
@@ -43,59 +43,59 @@ public class yuq {
                 if (event != null) {
                     switch (parameters[0].getType().getName()) {
                         case "com.xbaimiao.plugins.event.GroupMessageEvent": {
-                            GROUP_MESSAGE.put(listenerClass, method);
+                            GROUP_MESSAGE.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.PrivateMessageEvent": {
-                            PRIVATE_MESSAGE.put(listenerClass, method);
+                            PRIVATE_MESSAGE.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.MessageRecallEvent": {
-                            RECALL_MESSAGE.put(listenerClass, method);
+                            RECALL_MESSAGE.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.FriendAddEvent": {
-                            FriendAdd.put(listenerClass, method);
+                            FriendAdd.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.FriendDeleteEvent": {
-                            FriendDelete.put(listenerClass, method);
+                            FriendDelete.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.GroupMemberJoinEvent":{
-                            GROUP_JOIN.put(listenerClass, method);
+                            GROUP_JOIN.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.GroupMemberInviteEvent":{
-                            GROUP_JOIN_Invite.put(listenerClass, method);
+                            GROUP_JOIN_Invite.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.GroupMemberLeaveEvent":{
-                            GROUP_Leave.put(listenerClass, method);
+                            GROUP_Leave.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.GroupMemberKickEvent":{
-                            GROUP_Kick.put(listenerClass, method);
+                            GROUP_Kick.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.GroupBanMemberEvent":{
-                            GROUP_Ban.put(listenerClass, method);
+                            GROUP_Ban.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.GroupUnBanMemberEvent":{
-                            GROUP_UnBan.put(listenerClass, method);
+                            GROUP_UnBan.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.GroupMemberRequestEvent":{
-                            GROUP_New.put(listenerClass, method);
+                            GROUP_New.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.GroupRecallEvent":{
-                            GROUP_Reacll.put(listenerClass, method);
+                            GROUP_Reacll.put(listener, method);
                             break;
                         }
                         case "com.xbaimiao.plugins.event.PrivateRecallEvent":{
-                            Private_Reacll.put(listenerClass, method);
+                            Private_Reacll.put(listener, method);
                             break;
                         }
                         default:{

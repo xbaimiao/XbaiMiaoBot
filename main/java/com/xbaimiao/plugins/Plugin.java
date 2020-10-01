@@ -53,11 +53,11 @@ public class Plugin {
         return hasConfig;
     }
 
-    public InputStream getConfigInput() throws ConfigNotFound {
+    public InputStream getConfigInput() throws ConfigNotFoundError {
         if (hasConfig) {
             return configInput;
         }
-        throw new ConfigNotFound( getMain() + "配置文件未找到");
+        throw new ConfigNotFoundError( getMain() + "配置文件未找到");
     }
 
     public String getMain() {
