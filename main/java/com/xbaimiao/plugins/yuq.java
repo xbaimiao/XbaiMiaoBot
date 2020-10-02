@@ -62,43 +62,43 @@ public class yuq {
                             FriendDelete.put(listener, method);
                             break;
                         }
-                        case "com.xbaimiao.plugins.event.GroupMemberJoinEvent":{
+                        case "com.xbaimiao.plugins.event.GroupMemberJoinEvent": {
                             GROUP_JOIN.put(listener, method);
                             break;
                         }
-                        case "com.xbaimiao.plugins.event.GroupMemberInviteEvent":{
+                        case "com.xbaimiao.plugins.event.GroupMemberInviteEvent": {
                             GROUP_JOIN_Invite.put(listener, method);
                             break;
                         }
-                        case "com.xbaimiao.plugins.event.GroupMemberLeaveEvent":{
+                        case "com.xbaimiao.plugins.event.GroupMemberLeaveEvent": {
                             GROUP_Leave.put(listener, method);
                             break;
                         }
-                        case "com.xbaimiao.plugins.event.GroupMemberKickEvent":{
+                        case "com.xbaimiao.plugins.event.GroupMemberKickEvent": {
                             GROUP_Kick.put(listener, method);
                             break;
                         }
-                        case "com.xbaimiao.plugins.event.GroupBanMemberEvent":{
+                        case "com.xbaimiao.plugins.event.GroupBanMemberEvent": {
                             GROUP_Ban.put(listener, method);
                             break;
                         }
-                        case "com.xbaimiao.plugins.event.GroupUnBanMemberEvent":{
+                        case "com.xbaimiao.plugins.event.GroupUnBanMemberEvent": {
                             GROUP_UnBan.put(listener, method);
                             break;
                         }
-                        case "com.xbaimiao.plugins.event.GroupMemberRequestEvent":{
+                        case "com.xbaimiao.plugins.event.GroupMemberRequestEvent": {
                             GROUP_New.put(listener, method);
                             break;
                         }
-                        case "com.xbaimiao.plugins.event.GroupRecallEvent":{
+                        case "com.xbaimiao.plugins.event.GroupRecallEvent": {
                             GROUP_Reacll.put(listener, method);
                             break;
                         }
-                        case "com.xbaimiao.plugins.event.PrivateRecallEvent":{
+                        case "com.xbaimiao.plugins.event.PrivateRecallEvent": {
                             Private_Reacll.put(listener, method);
                             break;
                         }
-                        default:{
+                        default: {
                             getLogger().error(listenerClass.getName() + "类的" + method.getName() + "方法 , 未找到监听类型，取消注册该方法");
                         }
                     }

@@ -8,7 +8,8 @@ public class GroupUnBanMemberEvent {
     private final Group group;
     private final Member member;
     private final Member operator;
-    public GroupUnBanMemberEvent(com.icecreamqaq.yuq.event.GroupUnBanMemberEvent event){
+
+    public GroupUnBanMemberEvent(com.icecreamqaq.yuq.event.GroupUnBanMemberEvent event) {
         group = event.getGroup();
         member = event.getMember();
         operator = event.getOperator();

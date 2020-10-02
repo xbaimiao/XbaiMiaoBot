@@ -9,7 +9,7 @@ public class GroupMemberKickEvent {
     private final Member member;
     private final Member operator;
 
-    public GroupMemberKickEvent(com.icecreamqaq.yuq.event.GroupMemberKickEvent event){
+    public GroupMemberKickEvent(com.icecreamqaq.yuq.event.GroupMemberKickEvent event) {
         operator = event.getOperator();
         group = event.getGroup();
         member = event.getMember();

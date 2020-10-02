@@ -12,32 +12,32 @@ public class Start {
         YuQMiraiStart.start(args);
     }
 
-    public static void init(){
+    public static void init() {
         File settings = new File(System.getProperty("user.dir") + File.separator + "settings.yml");
         Config config = new Config(settings);
-        if (config.isEmpty()){
+        if (config.isEmpty()) {
             File plugins = new File(System.getProperty("user.dir") + File.separator + "plugins");
-            if (!plugins.exists()){
+            if (!plugins.exists()) {
                 plugins.mkdirs();
             }
-            config.set("QQ账号",123456789);
-            config.set("QQ密码",123456);
+            config.set("QQ账号", 123456789);
+            config.set("QQ密码", 123456);
             config.save();
             System.exit(0);
         }
         File conf = new File(System.getProperty("user.dir") + File.separator + "conf" +
                 File.separator + "YuQ.properties");
-        if (!conf.getParentFile().exists()){
+        if (!conf.getParentFile().exists()) {
             conf.getParentFile().mkdirs();
         }
         try {
-            if (!conf.exists()){
+            if (!conf.exists()) {
                 conf.createNewFile();
             }
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(conf)));
             bw.write("yu.scanPackages=com.xbaimiao\n" +
-                    "YuQ.Mirai.user.qq=" + config.getString("QQ账号" ) + "\n" +
-                    "YuQ.Mirai.user.pwd=" + config.getString("QQ密码" ) + "\n" +
+                    "YuQ.Mirai.user.qq=" + config.getString("QQ账号") + "\n" +
+                    "YuQ.Mirai.user.pwd=" + config.getString("QQ密码") + "\n" +
                     "#webServer.port=8000");
             bw.close();
         } catch (IOException e) {

@@ -8,13 +8,12 @@ public class GroupMemberJoinEvent {
     private final Group group;
     private final Member member;
 
-    public GroupMemberJoinEvent(com.icecreamqaq.yuq.event.GroupMemberJoinEvent event){
-        group =  event.getGroup();
+    public GroupMemberJoinEvent(com.icecreamqaq.yuq.event.GroupMemberJoinEvent event) {
+        group = event.getGroup();
         member = event.getMember();
     }
 
     /**
-     *
      * @return 群
      */
     public Group getGroup() {
@@ -22,7 +21,6 @@ public class GroupMemberJoinEvent {
     }
 
     /**
-     *
      * @return 加群者
      */
     public Member getMember() {

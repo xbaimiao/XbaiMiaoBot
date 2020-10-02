@@ -60,7 +60,7 @@ public abstract class JavaPlugin {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } catch (ConfigNotFoundError configNotFound) {
+        } catch (Plugin.ConfigNotFoundError configNotFound) {
             configNotFound.printStackTrace();
         }
     }

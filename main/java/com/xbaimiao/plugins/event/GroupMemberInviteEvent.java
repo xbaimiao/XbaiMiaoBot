@@ -8,10 +8,10 @@ public class GroupMemberInviteEvent {
     private final Member member;
     private final Member inviter;
 
-    public GroupMemberInviteEvent(com.icecreamqaq.yuq.event.GroupMemberInviteEvent event){
+    public GroupMemberInviteEvent(com.icecreamqaq.yuq.event.GroupMemberInviteEvent event) {
         group = event.getGroup();
         member = event.getMember();
-        inviter =  event.getInviter();
+        inviter = event.getInviter();
     }
 
     public Member getMember() {
@@ -23,7 +23,6 @@ public class GroupMemberInviteEvent {
     }
 
     /**
-     *
      * @return 邀请者
      */
     public Member getInviter() {

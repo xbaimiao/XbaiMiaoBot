@@ -10,8 +10,9 @@ public class GroupBanMemberEvent {
     private final Group group;
     private final Member operator;
     private final int time;
-    public GroupBanMemberEvent(com.icecreamqaq.yuq.event.GroupBanMemberEvent event){
-        member =event.getMember();
+
+    public GroupBanMemberEvent(com.icecreamqaq.yuq.event.GroupBanMemberEvent event) {
+        member = event.getMember();
         group = event.getGroup();
         operator = event.getOperator();
         time = event.getTime();

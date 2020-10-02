@@ -5,9 +5,10 @@ import com.icecreamqaq.yuq.entity.Member;
 
 public class GroupMemberLeaveEvent {
 
-    private Group group;
-    private Member member;
-    public GroupMemberLeaveEvent(com.icecreamqaq.yuq.event.GroupMemberLeaveEvent event){
+    private final Group group;
+    private final Member member;
+
+    public GroupMemberLeaveEvent(com.icecreamqaq.yuq.event.GroupMemberLeaveEvent event) {
         group = event.getGroup();
         member = event.getMember();
     }

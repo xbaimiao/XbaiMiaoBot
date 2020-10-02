@@ -7,6 +7,7 @@ import java.util.zip.ZipEntry;
 
 public class Plugin {
 
+    private final File file;
     private String jar;
     private String name;
     private String main;
@@ -15,7 +16,6 @@ public class Plugin {
     private boolean isPlugin;
     private boolean hasConfig;
     private InputStream configInput = null;
-    private final File file;
 
     protected Plugin(File plugin) {
         file = plugin;
@@ -57,7 +57,7 @@ public class Plugin {
         if (hasConfig) {
             return configInput;
         }
-        throw new ConfigNotFoundError( getMain() + "配置文件未找到");
+        throw new ConfigNotFoundError(getMain() + "配置文件未找到");
     }
 
     public String getMain() {
@@ -82,5 +82,11 @@ public class Plugin {
 
     public File getFile() {
         return file;
+    }
+
+    public static class ConfigNotFoundError extends Exception {
+        public ConfigNotFoundError(String a) {
+            super(a);
+        }
     }
 }

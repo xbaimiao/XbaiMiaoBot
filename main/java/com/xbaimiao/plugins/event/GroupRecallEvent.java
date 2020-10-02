@@ -10,7 +10,7 @@ public class GroupRecallEvent {
     private final Contact sender;
     private final Contact operator;
 
-    public GroupRecallEvent(com.icecreamqaq.yuq.event.GroupRecallEvent  event){
+    public GroupRecallEvent(com.icecreamqaq.yuq.event.GroupRecallEvent event) {
         group = event.getGroup();
         messageid = event.getMessageId();
         operator = event.getOperator();

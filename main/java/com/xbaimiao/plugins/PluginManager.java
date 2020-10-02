@@ -36,4 +36,11 @@ public class PluginManager {
         return null;
     }
 
+    public class FileisNotPluginError extends Exception {
+
+        public FileisNotPluginError(String s) {
+            super(s);
+        }
+    }
+
 }

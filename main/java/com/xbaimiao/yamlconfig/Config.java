@@ -16,6 +16,10 @@ public class Config {
         try {
             if (file.exists()) {
                 reload();
+                if (yaml.isEmpty()) {
+                    empty = true;
+                    return;
+                }
                 empty = false;
                 return;
             }

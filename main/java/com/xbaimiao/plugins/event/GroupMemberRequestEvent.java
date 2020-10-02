@@ -8,10 +8,10 @@ public class GroupMemberRequestEvent {
     private final com.icecreamqaq.yuq.event.GroupMemberRequestEvent event;
     private final String message;
     private final UserInfo qq;
-    private boolean accept;
     private final Group group;
+    private boolean accept;
 
-    public GroupMemberRequestEvent(com.icecreamqaq.yuq.event.GroupMemberRequestEvent event){
+    public GroupMemberRequestEvent(com.icecreamqaq.yuq.event.GroupMemberRequestEvent event) {
         this.event = event;
         group = event.getGroup();
         qq = event.getQq();
@@ -19,11 +19,11 @@ public class GroupMemberRequestEvent {
         message = event.getMessage();
     }
 
-    public boolean getAccept(){
+    public boolean getAccept() {
         return accept;
     }
 
-    public void setAccept(Boolean accept){
+    public void setAccept(Boolean accept) {
         event.setAccept(accept);
         this.accept = accept;
     }
@@ -34,6 +34,7 @@ public class GroupMemberRequestEvent {
 
     /**
      * 触发此事件的QQ
+     *
      * @return 触发此事件的QQ
      */
     public UserInfo getQq() {
